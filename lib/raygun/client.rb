@@ -17,7 +17,8 @@ module Raygun
       }
 
       if self.class.use_proxy?
-        self.class.http_proxy proxy_settings[:host], proxy_settings[:port]
+        proxy = self.class.proxy_settings
+        self.class.http_proxy proxy[:host], proxy[:port]
       end
     end
 
