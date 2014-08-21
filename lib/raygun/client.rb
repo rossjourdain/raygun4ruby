@@ -9,14 +9,16 @@ module Raygun
 
     base_uri "https://api.raygun.io/"
 
-    http_proxy proxy_settings[:host], proxy_settings[:port] if use_proxy?
-
     def initialize
       @api_key = require_api_key!
 
       @headers = {
         "X-ApiKey" => @api_key
       }
+
+      if self.class.use_proxy?
+        self.class.http_proxy proxy_settings[:host], proxy_settings[:port]
+      end
     end
 
     def require_api_key!
