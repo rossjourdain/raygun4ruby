@@ -9,6 +9,8 @@ module Raygun
 
     base_uri "https://api.raygun.io/"
 
+    http_proxy proxy_settings[:host], proxy_settings[:port] if use_proxy?
+
     def initialize
       @api_key = require_api_key!
 
@@ -33,6 +35,17 @@ module Raygun
           version:   Raygun::VERSION,
           clientUrl: Raygun::CLIENT_URL
         }
+      end
+
+      def proxy_settings
+        {
+          host: Raygun.configuration.proxy_host,
+          port: Raygun.configuration.proxy_port || 80
+        }
+      end
+
+      def use_proxy?
+        Raygun.configuration.proxy_host.present?
       end
 
       def error_details(exception)

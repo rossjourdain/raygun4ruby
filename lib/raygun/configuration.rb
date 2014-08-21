@@ -41,6 +41,12 @@ module Raygun
     # Which parameter keys should we filter out by default?
     config_option :filter_parameters
 
+    # Proxy Host
+    config_option :proxy_host
+
+    # Proxy Port
+    config_option :proxy_port
+
     # Exception classes to ignore by default
     IGNORE_DEFAULT = ['ActiveRecord::RecordNotFound',
                       'ActionController::RoutingError',
