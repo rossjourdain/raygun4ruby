@@ -37,14 +37,14 @@ module Raygun
         }
       end
 
-      def proxy_settings
+      def self.proxy_settings
         {
           host: Raygun.configuration.proxy_host,
           port: Raygun.configuration.proxy_port || 80
         }
       end
 
-      def use_proxy?
+      def self.use_proxy?
         Raygun.configuration.proxy_host.present?
       end
 
