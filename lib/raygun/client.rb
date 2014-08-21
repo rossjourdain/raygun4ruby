@@ -18,7 +18,7 @@ module Raygun
 
       if self.class.use_proxy?
         proxy = self.class.proxy_settings
-        self.class.http_proxy proxy[:host], proxy[:port]
+        self.class.http_proxy proxy[:host], proxy[:port], proxy[:user], proxy[:password]
       end
     end
 
@@ -42,13 +42,15 @@ module Raygun
 
       def self.proxy_settings
         {
-          host: Raygun.configuration.proxy_host,
-          port: Raygun.configuration.proxy_port || 80
+          host:     Raygun.configuration.proxy_host,
+          port:     Raygun.configuration.proxy_port || 80,
+          user:     Raygun.configuration.proxy_user,
+          password: Raygun.configuration.proxy_password
         }
       end
 
       def self.use_proxy?
-        Raygun.configuration.proxy_host.present?
+        !!Raygun.configuration.proxy_host
       end
 
       def error_details(exception)

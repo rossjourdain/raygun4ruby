@@ -47,6 +47,12 @@ module Raygun
     # Proxy Port
     config_option :proxy_port
 
+    # Proxy User
+    config_option :proxy_user
+
+    # Proxy Password
+    config_option :proxy_password
+
     # Exception classes to ignore by default
     IGNORE_DEFAULT = ['ActiveRecord::RecordNotFound',
                       'ActionController::RoutingError',
